@@ -8,15 +8,19 @@ Teaching material used during the High Performance Computing session of the EMBL
 
 Below are most of the commands used during the practical, so they can be copy/pasted, but I highly recommend typing along if you can.
 
-## Login to the frontend node
+## Login to the jump node
 
+```sh
+ssh bq_11denbi@129.206.69.162
 ```
-ssh <username>@login.cluster.embl.de
+
+```sh
+ssh <user##>@172.16.72.70
 ```
 
 ## Clone this git repository
 ```
-git clone https://git.embl.de/msmith/embl_hpc.git
+git clone https://github.com/grimbough/swc_hpc.git
 ```
 
 ## Identifying our computer
@@ -34,25 +38,25 @@ srun hostname
 ## Exploring our example program (don't run!)
 
 ```
-cd $HOME/embl_hpc/exercises
-./hpc_example -t 10 -m 100
+cd $HOME/swc_hpc/software
+# ./hpc_example -t 10 -l 100
 ```
 
 ## Running example program on on the cluster
 
 ```
-srun ./hpc_example -t 10 -m 100
+srun ./hpc_example -t 10 -l 100
 ```
 
 ## Using our reserved training space
 ```
-srun --­­reservation=training ./hpc_example -­t 10 -­m 100
+srun ./hpc_example -­t 10 -­m 100
 ```
 
 ## Running in the background
 
 ```
-sbatch ­­--reservation=training ./batch_job.sh
+sbatch ./hpc_example -­t 10 -­m 100
 ```
 
 ## Redirecting output
@@ -91,13 +95,6 @@ scancel <jobID>
 scancel -u <username>
 ```
 
-## Defining time limits
-```
-sbatch ­­--time=00­00:00:30  \
-    ­­--reservation=training \
-    batch_job.sh 60 500
-```
-
 ## Job efficiency statistics
 ```
 seff <jobID>
@@ -110,18 +107,6 @@ sbatch ­­--mail­user=<first.last>@embl.de \
     ./batch_job.sh 20 500
 ```
 
-## Finding and using software
-```
-module avail
-module spider samtools
-module load BWA
-```
-
-## BWA example
-```
-nano bwa/bwa_batch.sh
-sbatch ­­­­--reservation=training bwa/bwa_batch.sh
-```
 
 ## Running interactive jobs
 ```
