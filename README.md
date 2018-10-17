@@ -48,27 +48,23 @@ cd $HOME/swc_hpc/software
 srun ./hpc_example -t 10 -l 100
 ```
 
-## Using our reserved training space
-```
-srun ./hpc_example -­t 10 -­m 100
-```
-
 ## Running in the background
 
 ```
 sbatch ./hpc_example -­t 10 -­m 100
+squeue
 ```
 
 ## Redirecting output
 
 ```
-sbatch --output=output.txt --reservation=training ./batch_job.sh
+sbatch --output=output.txt ./hpc_example -­t 60 -­m 100
 ```
 
 ## Creating a larger list
-You will need to edit batch_jobs.sh to take arguments
+
 ```
-sbatch --output=output.txt --reservation=training ./batch_job.sh 20 ???
+sbatch --output=output.txt ./hpc_example -­t 30 -­m 5000000
 ```
 
 ## Displaying details of our cluster queue
@@ -80,13 +76,13 @@ scontrol show partition
 ## Requesting more resources
 
 ```
-sbatch --mem=8200 --reservation=training ./batch_job.sh 30 8000
+sbatch --mem=250 --output=output.txt ./hpc_example -­t 30 -­m 5000000
 ```
 
 ## Requesting a lot more resources
 
 ```
-sbatch --mem=100G --reservation=training ./batch_job.sh 30 5000
+sbatch --mem=8000 --output=output.txt ./hpc_example -­t 30 -­m 5000000
 ```
 
 ## Cancel jobs
@@ -94,19 +90,6 @@ sbatch --mem=100G --reservation=training ./batch_job.sh 30 5000
 scancel <jobID>
 scancel -u <username>
 ```
-
-## Job efficiency statistics
-```
-seff <jobID>
-```
-
-## Emailing output
-```
-sbatch ­­--mail­user=<first.last>@embl.de \
-    ­­--reservation=training \
-    ./batch_job.sh 20 500
-```
-
 
 ## Running interactive jobs
 ```
