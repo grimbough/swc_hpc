@@ -1,4 +1,4 @@
-#! usr/bin/env python
+#!/usr/bin/env python
 
 import resource
 import platform
@@ -12,7 +12,7 @@ def occupy_memory(length):
         size = int(length)
     except TypeError:
         raise "Expected an integer value for size parameter, got '{}''".format(length)
-    stdout.write("List length is {}\n".format(length))
+    print "List length is", format(length)
     list_of_ones = []
     for i in range(length):
         list_of_ones.append(1)
@@ -24,7 +24,7 @@ def wait_for(seconds):
         seconds = int(seconds)
     except TypeError:
         raise "Expected an integer value for time parameter, got '{}'".format(seconds)
-    stdout.write("Wait time is {} seconds\n".format(seconds))
+    print "Wait time is", format(seconds), "seconds"
     sleep(seconds)
 
 parser = ArgumentParser() # Use argparse.ArgumentParser to create a simple user interface
@@ -38,11 +38,11 @@ args   = parser.parse_args()
 secs   = args.time
 list_length = args.length
 
-stdout.write("Current host is: {}\n".format(platform.node()))
+print "Current host is:", format(platform.node())
 
 occupy_memory(list_length)
 wait_for(secs)
 
 # fetch the memory being used by the script and print it out
 mem_used = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1000.0
-stdout.write("Memory usage: {} MB\n".format(mem_used))
+print "Memory usage:", format(mem_used), " MB"
