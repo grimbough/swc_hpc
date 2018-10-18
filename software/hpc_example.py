@@ -12,9 +12,9 @@ def occupy_memory(length):
         size = int(length)
     except TypeError:
         raise "Expected an integer value for size parameter, got '{}''".format(length)
-    print "List length is", format(length)
+    print "List length is", format(size)
     list_of_ones = []
-    for i in range(length):
+    for i in range(size):
         list_of_ones.append(1)
 
 def wait_for(seconds):
@@ -30,7 +30,7 @@ def wait_for(seconds):
 parser = ArgumentParser() # Use argparse.ArgumentParser to create a simple user interface
 parser.add_argument("--time",   "-t", default=10, type=int,
                     help="Time (in whole seconds) that this script should take to run.")
-parser.add_argument("--length", "-l", default=0,  type=int,
+parser.add_argument("--length", "-l", default=0,  type=float,
                     help="Length of list to generate. This approximates the amount of memory that the script will take up when it runs. Must be an integer.")
 
 # parse arguments from the command line
